@@ -4,7 +4,6 @@
 #include <errno.h>
 #include <ctype.h>
 #include <stdarg.h>
-#include <strings.h>
 #include <time.h>
 #include <cstdint>
 #include <cstdio>
@@ -12,9 +11,10 @@
 #include <cstring>
 #include <string>
 
+#include "Win32Helper.h"
+
 #include <rct/List.h>
 
-#define RCT_PRINTF_WARNING(fmt, firstarg) __attribute__ ((__format__ (__printf__, fmt, firstarg)))
 class String
 {
 public:
