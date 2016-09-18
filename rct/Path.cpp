@@ -1,7 +1,7 @@
 #include "Path.h"
 #include "StackBuffer.h"
 
-#include <dirent.h>
+#include <direct.h>
 #include <limits.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -337,10 +337,10 @@ bool Path::mksubdir(const String &path) const
     return false;
 }
 
-bool Path::mkdir(const Path &path, MkDirMode mkdirMode, mode_t permissions)
+bool Path::mkdir(const Path &path, MkDirMode mkdirMode)
 {
     errno = 0;
-    if (!::mkdir(path.constData(), permissions) || errno == EEXIST || errno == EISDIR)
+    if (!::_mkdir(path.constData()) || errno == EEXIST || errno == ENOENT )
         return true;
     if (mkdirMode == Single)
         return false;

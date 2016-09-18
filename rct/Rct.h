@@ -3,9 +3,8 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <getopt.h>
 #include <stdio.h>
-#include <sys/select.h>
+#include "Win32Helper.h"
 #include <regex>
 
 #include <rct/List.h>

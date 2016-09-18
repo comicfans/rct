@@ -5,6 +5,8 @@
 enum { BufferSize = 1024 * 32 };
 #endif
 
+const size_t String::npos = std::string::npos;
+
 String String::compress() const
 {
 #ifndef RCT_HAVE_ZLIB

@@ -3,6 +3,8 @@
 #include <mutex>
 #include <iostream>
 
+#include "Win32Helper.h"
+
 static std::once_flag tzFlag;
 
 Date::Date()

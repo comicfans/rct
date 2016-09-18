@@ -18,7 +18,7 @@
 class String
 {
 public:
-    static const size_t npos = std::string::npos;
+    static const size_t npos;
 
     enum CaseSensitivity
     {

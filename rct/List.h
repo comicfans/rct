@@ -15,7 +15,7 @@ class List : public std::vector<T>
 {
     typedef std::vector<T> Base;
 public:
-    static const size_t npos = std::string::npos;
+    static const size_t npos;
     explicit List(size_t count = 0, const T &defaultValue = T())
         : Base(count, defaultValue)
     {}
@@ -390,5 +390,8 @@ public:
         return *this;
     }
 };
+
+template<typename T>
+const size_t List<T>::npos =  std::string::npos;
 
 #endif

@@ -34,7 +34,16 @@
 #include <time.h>
 #else
 #include <time.h>
-#define localtime_r(TM,TIME_T) localtime_s(TIME,TIM)
+struct tm *localtime_r(const time_t *timep,struct tm* result){
+    localtime_s(result,timep);
+    return result;
+}
+
+struct tm *gmtime_r(const time_t *timep,struct tm* result){
+    gmtime_s(result,timep);
+    return result;
+}
+
 #endif
 
 #ifdef __GNUC__
@@ -43,6 +52,11 @@
 #define RCT_PRINTF_WARNING(fmt, firstarg) 
 #endif
 
+#ifdef HAVE_GETOPT
+#include <getopt.h>
+#else
+#include "getopt.h"
+#endif
 
 #endif /* end of include guard: WIN32HELPER_H_IYWOUQJ8 */
 
