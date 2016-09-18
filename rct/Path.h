@@ -6,10 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <unistd.h>
 
 #include <rct/String.h>
 
@@ -105,7 +103,6 @@ public:
     static bool isHeader(const char *extension);
     Path parentDir() const;
     Type type() const;
-    mode_t mode() const;
     enum ResolveMode {
         RealPath,
         MakeAbsolute

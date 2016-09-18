@@ -85,6 +85,11 @@ if (ZLIB_FOUND)
 else ()
     message("ZLIB Can't be found. Rct configured without zlib support")
 endif ()
+
+
+find_package(Boost REQUIRED)
+list(APPEND RCT_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
+
 find_package(OpenSSL)
 if (OPENSSL_FOUND)
     set(RCT_DEFINITIONS ${RCT_DEFINITIONS} -DRCT_HAVE_OPENSSL)

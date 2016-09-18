@@ -4,7 +4,6 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #ifdef OS_Darwin
 # include <mach/mach_init.h>
 # include <mach/mach_port.h>

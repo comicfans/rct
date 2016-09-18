@@ -1,7 +1,5 @@
 #include "Plugin.h"
 
-#include <dlfcn.h>
-
 namespace Rct {
 
 void* loadPlugin(const Path& fileName)

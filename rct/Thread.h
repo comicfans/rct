@@ -2,7 +2,6 @@
 #define THREAD_H
 
 #include <mutex>
-#include <pthread.h>
 
 #include <rct/EventLoop.h>
 
@@ -28,7 +27,7 @@ public:
         return mAutoDelete;
     }
 
-    pthread_t self() const { return mThread; }
+    const std::thread &self() const { return mThread; }
 
 protected:
     virtual void run() = 0;
@@ -41,7 +40,7 @@ private:
 private:
     bool mAutoDelete;
     mutable std::mutex mMutex;
-    pthread_t mThread;
+    std::thread mThread;
     bool mRunning;
     EventLoop::WeakPtr mLoop;
 };

@@ -2,7 +2,6 @@
 #define Log_h
 
 #include <assert.h>
-#include <cxxabi.h>
 #include <climits>
 #include <ctype.h>
 #include <memory>

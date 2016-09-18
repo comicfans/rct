@@ -12,7 +12,7 @@ Thread::Thread()
 Thread::~Thread()
 {
     if (mRunning)
-        pthread_cancel(mThread);
+        m_thread.
 }
 
 void* Thread::localStart(void* arg)
