@@ -12,6 +12,11 @@
 # include <mutex>
 #endif
 
+#ifdef __WIN32
+#include <psapi.h>
+#include <windows.h>
+#endif
+
 #include "List.h"
 #include "Log.h"
 #include "String.h"
@@ -107,6 +112,22 @@ static inline uint64_t usageOSX()
 
     return total;
 }
+#elif defined(_WIN32)
+
+static inline uint64_t usageWindows() {
+
+	HANDLE hProcess = GetCurrentProcess();
+	PROCESS_MEMORY_COUNTERS pmc;
+
+    // Print the process identifier.
+
+	BOOL result = GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc));
+	CloseHandle(hProcess);
+
+	return  result ? pmc.WorkingSetSize : 0;
+
+
+}
 #endif
 
 uint64_t MemoryMonitor::usage()
@@ -118,6 +139,6 @@ uint64_t MemoryMonitor::usage()
 #elif defined(OS_Darwin)
     return usageOSX();
 #else
-#error "MemoryMonitor does not support this system"
+	return usageWindows();
 #endif
 }

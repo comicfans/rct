@@ -1,7 +1,6 @@
 #ifndef String_h
 #define String_h
 
-#include <errno.h>
 #include <ctype.h>
 #include <stdarg.h>
 #include <time.h>

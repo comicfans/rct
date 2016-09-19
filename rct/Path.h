@@ -63,7 +63,10 @@ public:
     inline bool exists() const { return type() != Invalid; }
     inline bool isDir() const { return type() == Directory; }
     inline bool isFile() const { return type() == File; }
-    inline bool isExecutable() const { return !access(constData(), X_OK); }
+	inline bool isExecutable() const {
+		//TODO
+		return false;
+	}
     inline bool isSocket() const { return type() == Socket; }
     inline bool isAbsolute() const { return (!isEmpty() && at(0) == '/'); }
     static const char *typeName(Type type);

@@ -57,7 +57,7 @@ public:
 
     static Path findCommand(const String &command, const char *path = 0);
 
-    pid_t pid() const { return mPid; }
+    int pid() const { return mPid; }
 
     void clear();
 
@@ -82,7 +82,7 @@ private:
     int mSync[2];
 
     mutable std::mutex mMutex;
-    pid_t mPid;
+    int mPid;
     enum { ReturnCrashed = -1, ReturnUnset = -2, ReturnKilled = -3 };
     int mReturn;
 

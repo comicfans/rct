@@ -2,7 +2,7 @@
 #define StopWatch_h
 
 #include <stdint.h>
-#include <sys/time.h>
+#include <time.h>
 
 #include <rct/Rct.h>
 

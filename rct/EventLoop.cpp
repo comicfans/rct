@@ -2,16 +2,13 @@
 
 #include <assert.h>
 #include <fcntl.h>
-#include <pthread.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
-#include <unistd.h>
 #include <algorithm>
 #include <atomic>
 #include <set>
@@ -58,19 +55,17 @@ EventLoop::WeakPtr EventLoop::mainLoop;
 std::mutex EventLoop::mainMutex;
 static std::atomic<int> mainEventPipe;
 static std::once_flag mainOnce;
-static pthread_key_t eventLoopKey;
+thread_local EventLoop::WeakPtr *tlsEventLoop;
 
 // sadly GCC < 4.8 doesn't support thread_local
 // fall back to pthread instead in order to support 4.7
 
 static EventLoop::WeakPtr& localEventLoop()
 {
-    EventLoop::WeakPtr* ptr = static_cast<EventLoop::WeakPtr*>(pthread_getspecific(eventLoopKey));
-    if (!ptr) {
-        ptr = new EventLoop::WeakPtr;
-        pthread_setspecific(eventLoopKey, ptr);
+    if (!tlsEventLoop) {
+		tlsEventLoop=new EventLoop::WeakPtr;
     }
-    return *ptr;
+    return *tlsEventLoop;
 }
 
 static void signalHandler(int /*sig*/)

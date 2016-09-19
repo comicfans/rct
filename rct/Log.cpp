@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <syslog.h>
 #include <mutex>
 
 #include "Path.h"

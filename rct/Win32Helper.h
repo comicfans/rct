@@ -58,6 +58,15 @@ struct tm *gmtime_r(const time_t *timep,struct tm* result){
 #include "getopt.h"
 #endif
 
+
+#ifdef _WINDOWS
+#include <io.h>
+    #define open _open
+    #define O_RDONLY _O_RDONLY
+#endif
+
+
+
 #endif /* end of include guard: WIN32HELPER_H_IYWOUQJ8 */
 
 

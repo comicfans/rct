@@ -6,8 +6,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <utime.h>
-#include <wordexp.h>
 
 #include "Log.h"
 #include "Rct.h"
