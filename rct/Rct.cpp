@@ -553,7 +553,7 @@ void Mutex::lock()
 {
     Timer timer;
     while (!tryLock()) {
-        usleep(10000);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10000));
         if (timer.elapsed() >= 10000) {
             error("Couldn't acquire lock in 10 seconds\n%s", Rct::backtrace().constData());
             timer.restart();

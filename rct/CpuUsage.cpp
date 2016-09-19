@@ -3,7 +3,6 @@
 #include <assert.h>
 #include <mutex>
 #include <thread>
-#include <unistd.h>
 #ifdef OS_Darwin
 #include <mach/mach.h>
 #include <mach/mach_host.h>
@@ -138,7 +137,7 @@ static void collectData()
             sData.lastTime = time;
         }
 
-        usleep(SLEEP_TIME);
+        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_TIME));
     }
 }
 
