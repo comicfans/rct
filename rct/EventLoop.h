@@ -21,6 +21,8 @@
 #  include <sys/types.h>
 #elif defined(HAVE_SELECT)
 #  include <sys/select.h>
+#elif defined(_WINDOWS)
+#  include <windows.h>
 #endif
 
 class Event
@@ -173,6 +175,8 @@ private:
         fd_set* rdfd;
         fd_set* wrfd;
     };
+#elif defined(_WINDOWS)    
+    typedef HANDLE NativeEvent;
 #endif
 
     void clearTimer(int id);

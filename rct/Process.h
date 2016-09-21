@@ -21,7 +21,7 @@ public:
 
     bool start(const Path &command,
                const List<String> &arguments = List<String>(),
-               const List<String> &environ = List<String>());
+               const List<String> &environment = List<String>());
 
     enum ExecState { Error, Done, TimedOut };
 
@@ -32,7 +32,7 @@ public:
     ExecState exec(const Path &command, const List<String> &arguments = List<String>(),
                    int timeout = 0, unsigned int flags = 0);
     ExecState exec(const Path &command, const List<String> &arguments,
-                   const List<String> &environ, int timeout = 0, unsigned int flags = 0);
+                   const List<String> &environment, int timeout = 0, unsigned int flags = 0);
 
     String errorString() const { std::lock_guard<std::mutex> lock(mMutex); return mErrorString; }
 
@@ -72,7 +72,7 @@ private:
     void handleOutput(int fd, String &buffer, int &index, Signal<std::function<void(Process*)> > &signal);
 
     ExecState startInternal(const Path &command, const List<String> &arguments,
-                            const List<String> &environ, int timeout = 0, unsigned int flags = 0);
+                            const List<String> &environment, int timeout = 0, unsigned int flags = 0);
 
 private:
 

@@ -6,6 +6,10 @@
 #include "Path.h"
 #include "Serializer.h"
 
+#ifdef _WINDOWS
+#include <io.h>
+#endif
+
 class DataFile
 {
 public:
@@ -55,11 +59,20 @@ public:
             if (!Path::mkdir(mPath.parentDir()))
                 return false;
             mTempFilePath = mPath + "XXXXXX";
-            const int ret = mkstemp(&mTempFilePath[0]);
-            if (ret == -1) {
+#ifndef _WINDOWS
+			const int ret = mkstemp(&mTempFilePath[0]);
+            if (ret == -1) 
+#else
+			char* name = _mktemp(&mTempFilePath[0]);
+			if (name==NULL)
+#endif
+			{
                 mError = String::format<128>("mkstemp failure %d (%s)", errno, Rct::strerror().constData());
                 return false;
             }
+#ifdef _WINDOWS
+			const int ret = ::_open(name, O_RDWR, S_IREAD);
+#endif
             mFile = fdopen(ret, "w");
             if (!mFile) {
                 mError = String::format<128>("fdopen failure %d (%s)", errno, Rct::strerror().constData());

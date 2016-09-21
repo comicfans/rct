@@ -252,9 +252,17 @@ static inline bool wildCmp(const char *wild, const char *string, String::CaseSen
 String strerror(int error = errno);
 }
 
+#ifndef _WINDOWS
 #define eintrwrap(VAR, BLOCK)                   \
     do {                                        \
         VAR = BLOCK;                            \
     } while (VAR == -1 && errno == EINTR)
+#else
+#define eintrwrap(VAR, BLOCK)                   \
+    do {                                        \
+        VAR = BLOCK;                            \
+    } while (VAR == INVALID_HANDLE_VALUE )
+
+#endif
 
 #endif

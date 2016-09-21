@@ -66,6 +66,9 @@ struct tm *gmtime_r(const time_t *timep,struct tm* result){
 #endif
 
 
+#ifndef PATH_MAX
+#define PATH_MAX MAX_PATH
+#endif
 
 #endif /* end of include guard: WIN32HELPER_H_IYWOUQJ8 */
 
